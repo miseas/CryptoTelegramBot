@@ -9,21 +9,18 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#tada-inspiration">Inspiration</a>
-    </li>
-    <li>
       <a href="#star-getting-started">Getting Started</a>
       <ul>
         <li><a href="#what-you-will-need">What you will need</a></li>
-        <li><a href="#computer-installation">Installation</a></li>
-        <li><a href="#white_check_mark-add-btb-to-your-telegram-channel">Add BTB to your Telegram Channel</a></li>
+        <li><a href="#installation">Installation</a></li>
+        <li><a href="#add-bot-to-your-telegram-channel">Add BTB to your Telegram Channel</a></li>
       </ul>
     </li>
     <li><a href="#battery-usage">Usage</a></li>
   </ol>
 </details>
 
-## :star: Getting started
+## Getting started
 
 ### What you will need:
 
@@ -38,17 +35,16 @@ Open a Terminal and copy these commands (Linux & Mac devices):
 
 ```bash
 cd ~
-git clone https://github.com/tomassirio/BitcoinTelegramBot.git
-cd ./BitcoinTelegramBot
-mv .env.example .env
-go get github.com/tomassirio/bitcoinTelegram
+git clone https://github.com/miseas/CryptoTelegramBot.git
+cd ./CryptoTelegramBot
+go get cryptoTelegramBot
 go run main.go
 ```
 
 ##### Warning: 
 This won't work unless you replace the **REPLACE_WITH_TOKEN** on the .env file with the Token granted by @BotFather
 
-### Add BTB to your Telegram Channel
+### Add bot to your Telegram Channel
 
 Open [@BotFather](https://telegram.me/botfather) on telegram and create a new bot with it's __/newbot__ command.
 
@@ -64,7 +60,7 @@ historic - Gets a percentage between Today's and Yesterday's price. Default to B
 summary - Gets both the price and historic values. Default to BTCEUR
 ```
 
-## Usage
+###  Usage
 
 Once the bot is running and added to your Telegram Group, you can use any of the following commands:
 

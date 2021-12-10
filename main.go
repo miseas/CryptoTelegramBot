@@ -5,8 +5,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/tomassirio/bitcoinTelegram/config"
-	"github.com/tomassirio/bitcoinTelegram/handler"
+	"cryptoTelegramBot/config"
+	"cryptoTelegramBot/handler"
 
 	tb "gopkg.in/tucnak/telebot.v2"
 )
@@ -41,17 +41,6 @@ func main() {
 	})
 	log.Println("OnText ✅ Loaded!")
 
-	b.Handle(tb.OnChannelPost, func(m *tb.Message) {
-		log.Println("OnChannelPost: " + m.Text)
-		if strings.Contains(strings.ToLower(m.Text), "crypto") {
-			g := &tb.Animation{File: tb.FromURL("https://c.tenor.com/ndyV5-3mkisAAAAS/kissing-kiss.gif")}
-			b.Send(m.Chat, "Someone said crypto???")
-			b.Send(m.Chat, g)
-		}
-	})
-	log.Println("OnChannelPost ✅ Loaded!")
-
 	// blocks until shutdown
 	b.Start()
-
 }

@@ -5,7 +5,7 @@ import (
 	"math"
 	"strconv"
 
-	"github.com/tomassirio/bitcoinTelegram/utils"
+	"cryptoTelegramBot/utils"
 )
 
 func GetSummary(sym string) (string, string, string, error) {

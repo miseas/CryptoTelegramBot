@@ -1,4 +1,4 @@
-module github.com/tomassirio/bitcoinTelegram
+module cryptoTelegramBot
 
 go 1.15
 

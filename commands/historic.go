@@ -7,7 +7,7 @@ import (
 
 	tb "gopkg.in/tucnak/telebot.v2"
 
-	"github.com/tomassirio/bitcoinTelegram/utils"
+	"cryptoTelegramBot/utils"
 )
 
 func GetHistoric(sym string) (string, string, *tb.Animation, error) {

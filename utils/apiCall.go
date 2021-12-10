@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/tomassirio/bitcoinTelegram/model"
+	"cryptoTelegramBot/model"
 )
 
 func GetApiCall(sym string) (*model.Price, error) {

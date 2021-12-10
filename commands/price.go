@@ -3,7 +3,7 @@ package commands
 import (
 	"log"
 
-	"github.com/tomassirio/bitcoinTelegram/utils"
+	"cryptoTelegramBot/utils"
 )
 
 func GetPrice(sym string) (string, string, error) {

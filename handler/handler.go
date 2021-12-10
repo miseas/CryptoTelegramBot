@@ -3,7 +3,7 @@ package handler
 import (
 	"log"
 
-	"github.com/tomassirio/bitcoinTelegram/commands"
+	"cryptoTelegramBot/commands"
 	tb "gopkg.in/tucnak/telebot.v2"
 )
 
@@ -40,13 +40,6 @@ func LoadHandler(b *tb.Bot) map[string]func(m *tb.Message) {
 			b.Send(m.Chat, symbol+"'s Current price is: "+p+"\n"+symbol+"'s Price compared to yesterday is: "+h)
 		}
 	}
-
-	// commandMap["crypto"] = func(m *tb.Message) {
-	// 	log.Println("PAYLOAD: " + m.Payload)
-	// 	g := &tb.Animation{File: tb.FromURL("https://c.tenor.com/ndyV5-3mkisAAAAS/kissing-kiss.gif")}
-	// 	b.Send(m.Chat, "Someone said crypto???")
-	// 	b.Send(m.Chat, g)
-	// }
 
 	return commandMap
 }
