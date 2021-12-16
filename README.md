@@ -13,7 +13,7 @@
       <ul>
         <li><a href="#what-you-will-need">What you will need</a></li>
         <li><a href="#installation">Installation</a></li>
-        <li><a href="#add-bot-to-your-telegram-channel">Add BTB to your Telegram Channel</a></li>
+        <li><a href="#add-bot-to-your-telegram-channel">Add bot to your Telegram Channel</a></li>
       </ul>
     </li>
     <li><a href="#battery-usage">Usage</a></li>

@@ -2,8 +2,10 @@ package handler
 
 import (
 	"log"
+	"strings"
 
 	"cryptoTelegramBot/commands"
+
 	tb "gopkg.in/tucnak/telebot.v2"
 )
 
@@ -39,6 +41,34 @@ func LoadHandler(b *tb.Bot) map[string]func(m *tb.Message) {
 		} else {
 			b.Send(m.Chat, symbol+"'s Current price is: "+p+"\n"+symbol+"'s Price compared to yesterday is: "+h)
 		}
+	}
+
+	commandMap["/notification"] = func(m *tb.Message) {
+		log.Println("PAYLOAD: " + m.Payload)
+		b.Send(m.Chat, "Sorry this is WIP")
+	}
+
+	commandMap["/notification_temp"] = func(m *tb.Message) {
+		log.Println("PAYLOAD: " + m.Payload)
+		slice := strings.Fields(m.Payload)
+		switch slice[0] { // missing expression means "true"
+		case "add":
+			symbol, _ := commands.CreateNotification(m.Chat.Recipient(), slice[1], slice[2], slice[3])
+			if symbol == "" {
+				b.Send(m.Chat, "Sorry I don't know "+m.Payload)
+			} else {
+				b.Send(m.Chat, "Notification created for symbol: "+symbol)
+			}
+		case "remove":
+			msg := commands.DeleteNotification(m.Chat.Recipient(), slice[1], slice[2], slice[3])
+			b.Send(m.Chat, msg)
+		case "list":
+			msg := commands.GetNotificationsByUser(m.Chat.Recipient())
+			b.Send(m.Chat, msg)
+		default:
+			b.Send(m.Chat, "I don't know the cmd: "+slice[0])
+		}
+
 	}
 
 	return commandMap
