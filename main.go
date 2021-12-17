@@ -6,7 +6,6 @@ import (
 	"sync"
 	"time"
 
-	"cryptoTelegramBot/commands"
 	"cryptoTelegramBot/config"
 	"cryptoTelegramBot/handler"
 	"cryptoTelegramBot/repo"
@@ -72,43 +71,12 @@ func main() {
 	}
 
 	channel := make(chan string)
-
 	func2 := func() {
-		test_async(channel, b)
+		handler.PullNotifications(channel, b)
 	}
 
 	Parallelize(func1, func2)
 
-}
-
-type Client struct {
-	client_id string
-}
-
-func (c Client) Recipient() string {
-	return c.client_id
-}
-
-func test_async(channel chan string, b *tb.Bot) {
-	log.Println("EMPIEZA")
-	for {
-		select {
-		// handle incoming updates
-		default:
-			log.Println("Imprime")
-			time.Sleep(60 * time.Second)
-			notifications := repo.GetAllNotifications()
-			for _, notif := range notifications {
-				log.Printf("\n----\nId: %d\nUserId: %s\nSymbol: %s\nCompare Value: %f\n----", notif.Id, notif.UserId, notif.Symbol, notif.CompareValue)
-				alert_msg, _ := commands.CheckNotification(notif)
-				if alert_msg != "" {
-					client := Client{client_id: notif.UserId}
-					log.Printf("struct1: %v\n", client)
-					b.Send(client, alert_msg)
-				}
-			}
-		}
-	}
 }
 
 func Parallelize(functions ...func()) {

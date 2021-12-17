@@ -25,6 +25,11 @@ func CreateNotification(user_id string, sym string, condition string, compare_va
 	return p.Symbol, err
 }
 
+func GetAllNotifications() []repo.CryptoNotification {
+	notifications := repo.GetAllNotifications()
+	return notifications
+}
+
 func GetNotificationsByUser(user_id string) string {
 	var msg_notifications string
 	notifications := repo.GetUserNotifications(user_id)

@@ -3,6 +3,7 @@ package handler
 import (
 	"log"
 	"strings"
+	"time"
 
 	"cryptoTelegramBot/commands"
 
@@ -72,4 +73,34 @@ func LoadHandler(b *tb.Bot) map[string]func(m *tb.Message) {
 	}
 
 	return commandMap
+}
+
+func PullNotifications(channel chan string, b *tb.Bot) {
+	log.Println("Start PullNotifications")
+	for {
+		select {
+		// handle incoming updates
+		default:
+			// TODO: setup timer
+			time.Sleep(60 * time.Second)
+			notifications := commands.GetAllNotifications()
+			for _, notif := range notifications {
+				// log.Printf("\n----\nId: %d\nUserId: %s\nSymbol: %s\nCompare Value: %f\n----", notif.Id, notif.UserId, notif.Symbol, notif.CompareValue)
+				alert_msg, _ := commands.CheckNotification(notif)
+				if alert_msg != "" {
+					client := Client{client_id: notif.UserId}
+					log.Printf("struct1: %v\n", client)
+					b.Send(client, alert_msg)
+				}
+			}
+		}
+	}
+}
+
+type Client struct {
+	client_id string
+}
+
+func (c Client) Recipient() string {
+	return c.client_id
 }
