@@ -1,6 +1,6 @@
 
 <p align="center">
-  <h1 align="center">BITCOIN-TELEGRAM-BOT</h1>
+  <h1 align="center">CRYPTO-TELEGRAM-BOT</h1>
 </p>
 
 
@@ -9,40 +9,30 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#star-getting-started">Getting Started</a>
+      <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#what-you-will-need">What you will need</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#minimum-requirements">Minimum requirements</a></li>
         <li><a href="#add-bot-to-your-telegram-channel">Add bot to your Telegram Channel</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    <li>
+       <a href="#usage">Usage</a></li>
+       <ul>
+          <li><a href="#about-notifications">About notifications</a></li>
+          <li><a href="#exchanges-supported">Exchanges supported</a></li>
       </ul>
     </li>
-    <li><a href="#battery-usage">Usage</a></li>
   </ol>
 </details>
 
 ## Getting started
 
-### What you will need:
+### Minimum requirements:
 
-- You are going to need a computer or server where to host the bot.
 - Git
-- Golang v1.13
-- A device with Telegram
-
-### Installation
-
-Open a Terminal and copy these commands (Linux & Mac devices):
-
-```bash
-cd ~
-git clone https://github.com/miseas/CryptoTelegramBot.git
-cd ./CryptoTelegramBot
-go get cryptoTelegramBot
-go run main.go
-```
-
-##### Warning: 
-This won't work unless you replace the **REPLACE_WITH_TOKEN** on the .env file with the Token granted by @BotFather
+- Golang
+- Telegram
+- Computer/server to host the app
 
 ### Add bot to your Telegram Channel
 
@@ -52,20 +42,49 @@ Assign it a name. This name won't be the one that is shown on each message, so y
 
 @BotFather will grant you a Token. This token is the one that will replace the **REPLACE_WITH_TOKEN** on the .env.example file on this repository. (Don't forget to rename that file to .env)
 
-You can also play a little bit more with @BotFather. For example you can use the __/setcommands__ to define the uses your bot has on the '/' icon:
+You can use the __/setcommands__ to define the uses your bot has on the '/' icon:
 
 ```
-price - Gets symbol actual price. Default to BTCEUR
-historic - Gets a percentage between Today's and Yesterday's price. Default to BTCEUR
-summary - Gets both the price and historic values. Default to BTCEUR
+price - Use price <symbol> . Gets symbol actual price. Default BTCEUR
+historic - Use historic <symbol> . Gets a percentage between Today's and Yesterday's price. Default BTCEUR
+summary - Use summary <symbol> . Gets both the price and historic values. Default BTCEUR
+notification - Use add <symbol> <compare> <value>| remove <symbol> <compare> <value> | list . Get notified if the symbol es higher > or lower <
 ```
 
-###  Usage
+### Installation
 
-Once the bot is running and added to your Telegram Group, you can use any of the following commands:
+Open a Terminal and copy these commands (Linux & Mac devices):
+
+```bash
+cd ~
+git clone https://github.com/miseas/CryptoTelegramBot.git
+cd ./CryptoTelegramBot
+cp .env.example .env
+go get cryptoTelegramBot
+go run main.go
+```
+
+##### Warning: 
+You must replace the **REPLACE_WITH_TOKEN** on the .env file with the Token granted by @BotFather
+
+
+##  Usage
+
+Once the bot is running, you can add it to a Telegram group and use any of the following commands:
 
 ```sh
-    * /price :  Gets symbol last price. Default to BTCEUR
-    * /historic : Gets a percentage between Today's and Yesterday's price
-    * /summary : Gets both the price and historic values
+    * /price: Use price <symbol> . Gets symbol actual price. Default BTCEUR
+    * /historic: Use historic <symbol> . Gets a percentage between Today's and Yesterday's price. Default BTCEUR
+    * /summary: Use summary <symbol> . Gets both the price and historic values. Default BTCEUR
+    * /notification [add/remove/list] [a_symbol] [a_compare_symbol] [a_value]: . Get notified if the symbol es higher > or lower <
 ```
+
+###  About Notifications
+
+Notifications are still a WIP. You can add/remove or list your notifications. The notifications are checked every 1 min (or custom). After notified 3 times, it will be removed automatically from the list. 
+
+
+### Exchanges supported 
+
+(more will be added):
+  - Binance
