@@ -49,7 +49,7 @@ func LoadHandler(b *tb.Bot) map[string]func(m *tb.Message) {
 		b.Send(m.Chat, "Sorry this is WIP")
 	}
 
-	commandMap["/notification_temp"] = func(m *tb.Message) {
+	commandMap["/notification"] = func(m *tb.Message) {
 		log.Println("PAYLOAD: " + m.Payload)
 		slice := strings.Fields(m.Payload)
 		switch slice[0] { // missing expression means "true"
@@ -88,9 +88,11 @@ func PullNotifications(channel chan string, b *tb.Bot) {
 				// log.Printf("\n----\nId: %d\nUserId: %s\nSymbol: %s\nCompare Value: %f\n----", notif.Id, notif.UserId, notif.Symbol, notif.CompareValue)
 				alert_msg, _ := commands.CheckNotification(notif)
 				if alert_msg != "" {
-					client := Client{client_id: notif.UserId}
-					log.Printf("struct1: %v\n", client)
+					client := Client{Client_id: notif.UserId}
 					b.Send(client, alert_msg)
+					if commands.UpdateNotificationCounter(notif) {
+						b.Send(client, "Notification deleted after being notified 3 times")
+					}
 				}
 			}
 		}
@@ -98,9 +100,9 @@ func PullNotifications(channel chan string, b *tb.Bot) {
 }
 
 type Client struct {
-	client_id string
+	Client_id string
 }
 
 func (c Client) Recipient() string {
-	return c.client_id
+	return c.Client_id
 }

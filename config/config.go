@@ -13,7 +13,6 @@ type Config struct {
 
 func LoadConfig() *Config {
 	// load .env file from given path
-	// we keep it empty it will load .env from current directory
 	err := godotenv.Load(".env")
 
 	if err != nil {

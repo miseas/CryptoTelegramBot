@@ -3,12 +3,12 @@ package main
 import (
 	"log"
 	"strings"
-	"sync"
 	"time"
 
 	"cryptoTelegramBot/config"
 	"cryptoTelegramBot/handler"
 	"cryptoTelegramBot/repo"
+	"cryptoTelegramBot/utils"
 
 	tb "gopkg.in/tucnak/telebot.v2"
 )
@@ -18,8 +18,7 @@ func main() {
 	repo.Create_tables()
 
 	b, err := tb.NewBot(tb.Settings{
-		// You can also set custom API URL.
-		// If field is empty it equals to "https://api.telegram.org".
+		// You can set custom API URL. If empty it equals to "https://api.telegram.org".
 		Token:  config.LoadConfig().Token,
 		Poller: &tb.LongPoller{Timeout: 10 * time.Second},
 	})
@@ -37,33 +36,13 @@ func main() {
 	b.Handle(tb.OnText, func(m *tb.Message) {
 		log.Println(m.Text)
 		if strings.Contains(strings.ToLower(m.Text), "crypto") {
-			g := &tb.Animation{File: tb.FromURL("https://c.tenor.com/ndyV5-3mkisAAAAS/kissing-kiss.gif")}
+			g := &tb.Animation{File: tb.FromURL("https://c.tenor.com/hJ834RcJZbYAAAAC/elon-musk-dance.gif")}
 			log.Printf("struct1: %v\n", m.Chat)
 			b.Send(m.Chat, "Someone said crypto???")
 			b.Send(m.Chat, g)
 		}
-		// b.Send(m.Sender, "hello world")
 	})
 	log.Println("OnText ✅ Loaded!")
-
-	// channel := make(chan string)
-	// go test_async(channel)
-
-	// for {
-	// 	select {
-	// 	// handle incoming updates
-	// 	case upd := <-channel:
-	// 		log.Println("salimos con data" + upd)
-	// 		// call to stop polling
-	// 		// case <-b.stop:
-	// 		// 	close(stop)
-	// 		// 	return
-	// 	}
-	// }
-
-	// client := Client{client_id: "369774783"}
-	// log.Printf("struct1: %v\n", client)
-	// b.Send(client, "hola capo!")
 
 	func1 := func() {
 		// blocks until shutdown
@@ -75,20 +54,6 @@ func main() {
 		handler.PullNotifications(channel, b)
 	}
 
-	Parallelize(func1, func2)
+	utils.Parallelize(func1, func2)
 
-}
-
-func Parallelize(functions ...func()) {
-	var waitGroup sync.WaitGroup
-	waitGroup.Add(len(functions))
-
-	defer waitGroup.Wait()
-
-	for _, function := range functions {
-		go func(copy func()) {
-			defer waitGroup.Done()
-			copy()
-		}(function)
-	}
 }

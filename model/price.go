@@ -13,7 +13,6 @@ type Price struct {
 	Symbol          string `json:"symbol"`
 }
 
-// https://bitex.la/developers#api_ticker
 /*
 {
   "last":               1230.0,  // Last transaction price
@@ -25,5 +24,6 @@ type Price struct {
   "volume":        16.45315074,  // Transacted volume for the last 24 hours.
   "bid":          1226.5583985,  // Highest current buy order.
   "ask":         1235.71481927   // Lowest current ask order.
+  "symbol":             BTCEUR   // pair crypto symbol.
 }
 */
