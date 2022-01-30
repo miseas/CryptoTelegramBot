@@ -18,7 +18,8 @@ func main() {
 	repo.Create_tables()
 
 	b, err := tb.NewBot(tb.Settings{
-		// You can set custom API URL. If empty it equals to "https://api.telegram.org".
+		// You can also set custom API URL.
+		// If field is empty it equals to "https://api.telegram.org".
 		Token:  config.LoadConfig().Token,
 		Poller: &tb.LongPoller{Timeout: 10 * time.Second},
 	})
@@ -41,8 +42,26 @@ func main() {
 			b.Send(m.Chat, "Someone said crypto???")
 			b.Send(m.Chat, g)
 		}
+		// b.Send(m.Chat, "")
+		// b.Send(m.Sender, "")
 	})
 	log.Println("OnText ✅ Loaded!")
+
+	// for {
+	// 	select {
+	// 	// handle incoming updates
+	// 	case upd := <-channel:
+	// 		log.Println("salimos con data" + upd)
+	// 		// call to stop polling
+	// 		// case <-b.stop:
+	// 		// 	close(stop)
+	// 		// 	return
+	// 	}
+	// }
+
+	// client := handler.Client{Client_id: "369774783"}
+	// log.Printf("struct1: %v\n", client)
+	// b.Send(client, "Totalmente de acuerdo capo!")
 
 	func1 := func() {
 		// blocks until shutdown
